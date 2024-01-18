@@ -1,0 +1,139 @@
+<div class="addContainer">
+  <div class="contact-form">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          <div class="modal-about">
+            {{ dialogTitle }}
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <form class="register-form m-4" [formGroup]="equipmentForm!" (ngSubmit)="(submit)">
+        <div *ngIf="isAddEquipmentAction">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Equipment Label</mat-label>
+                <input matInput formControlName="equipmentLabel" required />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>bookmark</i>
+                <mat-error *ngIf="equipmentForm?.get('equipmentLabel')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="equipmentForm?.get('equipmentLabel')?.hasError('duplicated')">Duplicated field</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Equipment Type</mat-label>
+                <mat-select formControlName="equipmentType" required>
+                  <mat-option *ngFor="let type of equipmentTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="equipmentForm?.get('equipmentType')?.hasError('required')">Required field</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>IP Address</mat-label>
+                <input matInput formControlName="addressIp" />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>alternate_email</i>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Mac Address</mat-label>
+                <input matInput formControlName="addressMac" />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>alternate_email</i>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" [disabled]="!equipmentForm?.valid" [mat-dialog-close]="1"
+                  (click)="confirmAddChild()">
+                  Add equipment
+                </button>
+                <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isEditAction">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Equipment Label</mat-label>
+                <input matInput formControlName="equipmentLabel" required />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>bookmark</i>
+                <mat-error *ngIf="equipmentForm?.get('equipmentLabel')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="equipmentForm?.get('equipmentLabel')?.hasError('duplicated')">Duplicated field</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Equipment Type</mat-label>
+                <mat-select formControlName="equipmentType" required>
+                  <mat-option *ngFor="let type of equipmentTypes" [value]="type">{{ type }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="equipmentForm?.get('equipmentType')?.hasError('required')">Required field</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>IP Address</mat-label>
+                <input matInput formControlName="addressIp" />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>alternate_email</i>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Mac Address</mat-label>
+                <input matInput formControlName="addressMac" />
+                <i class="material-icons-two-tone color-icon p-3" matSuffix>alternate_email</i>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" [disabled]="!equipmentForm?.valid" [mat-dialog-close]="1"
+                  (click)="confirmEdit()">
+                  Save changes
+                </button>
+                <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

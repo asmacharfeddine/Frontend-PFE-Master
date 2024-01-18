@@ -1,0 +1,22 @@
+.section {
+  flex: 1; /* The section takes up available space */
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-buttons {
+  display: flex;
+  gap: 8px; /* Adjust the gap between buttons as needed */
+}
+.custom-dialog {
+  max-width: 70%; /* Adjust the percentage to your preference */
+}
+
+/*.badge.col-green{
+  background-color: rgb(65, 165, 65);
+  text-decoration-color: black;
+  color: black
+
+}*/

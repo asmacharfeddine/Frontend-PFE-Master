@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+.ngx-pagination .current {
+  background: #3f51b5 !important;
+  border: transparent !important;
+}
+.bg-color-primary
+{
+  background-color: #3f51b5;
+}
+.bg-color-danger{
+  background-color: red;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

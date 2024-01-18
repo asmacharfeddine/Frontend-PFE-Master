@@ -1,0 +1,33 @@
+.float-container {
+//  padding: 20px;
+display: flex;
+
+}
+
+.float-child {
+  //width: 50%;
+ // float: left;
+  flex: 1;
+
+  //padding: 20px;
+}
+
+.float-child:first-child{
+  margin-right: 20px;
+
+}
+
+--------------------------------------
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid yellow;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+}

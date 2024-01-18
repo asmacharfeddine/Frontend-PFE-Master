@@ -1,0 +1,87 @@
+<div class="addContainer">
+  <div class="contact-form">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          <div class="modal-about">
+            {{ dialogTitle }}
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <form class="register-form m-4" [formGroup]="staffgroupForm!" (ngSubmit)="(submit)">
+        <div *ngIf="isAddAction">
+          <div class="col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Staff Group Name</mat-label>
+              <input matInput formControlName="staffGrpName" required />
+              <i class="material-icons-two-tone color-icon p-3" matSuffix>library_add</i>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpName')?.hasError('required')">Required field</mat-error>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpName')?.hasError('duplicated')">Duplicated field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Staff Group Type</mat-label>
+              <mat-select formControlName="staffGrpType" required>
+                <mat-option *ngFor="let type of staffGroupTypes" [value]="type">{{ type }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpType')?.hasError('required')">Required field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" [disabled]="!staffgroupForm?.valid" [mat-dialog-close]="1"
+                  (click)="confirmAdd()">
+                  Add
+                </button>
+                <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isEditAction">
+          <div class="col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Staff Group Name</mat-label>
+              <input matInput formControlName="staffGrpName" required />
+              <i class="material-icons-two-tone color-icon p-3" matSuffix>library_add</i>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpName')?.hasError('required')">Required field</mat-error>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpName')?.hasError('duplicated')">Duplicated field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>Staff Group Type</mat-label>
+              <mat-select formControlName="staffGrpType" required>
+                <mat-option *ngFor="let type of staffGroupTypes" [value]="type">{{ type }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="staffgroupForm?.get('staffGrpType')?.hasError('required')">Required field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="example-button-row">
+                <button mat-raised-button color="primary" [disabled]="!staffgroupForm?.valid" [mat-dialog-close]="1"
+                  (click)="confirmEdit()">
+                  Save Changes
+                </button>
+                <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

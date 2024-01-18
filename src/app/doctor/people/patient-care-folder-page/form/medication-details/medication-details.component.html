@@ -1,0 +1,93 @@
+<div class="addContainer" style="max-width: 600px;">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+          {{recievedMedication.name}} Details
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="medicationDetailsForm!">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" name="code" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label> Name</mat-label>
+            <input matInput formControlName="name" name="name" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>DosageForm</mat-label>
+            <input matInput formControlName="dosageForm" name="dosageForm" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" name="type" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Force</mat-label>
+            <input matInput formControlName="force" name="force" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>activeIngredients</mat-label>
+            <input matInput formControlName="activeIngredients" name="activeIngredients" readonly/>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+          </div>
+
+
+
+
+
+        <div class="float-container">
+
+          <div class="float-child">
+
+          </div>
+
+          <div class="float-child" style="margin-right: 20px">
+
+          </div>
+        </div>
+
+
+
+        <!--<div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [mat-dialog-close]="1" >Add</button>
+              <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </form>
+  </div>
+</div>

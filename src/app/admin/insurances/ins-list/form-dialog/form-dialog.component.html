@@ -1,0 +1,125 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+
+        <div class="modal-about">
+          {{dialogTitle}}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close(); " class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit" >
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance company Name </mat-label>
+            <input matInput formControlName="insNm" required>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>assignment</mat-icon>
+            <mat-error >
+              Insurance company Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance company Number</mat-label>
+            <input matInput formControlName="insNumber" required>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>call</mat-icon>
+            <mat-error >
+              Insurance company Number is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Policy Name</mat-label>
+            <input matInput formControlName="policyNm" required>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>assignment</mat-icon>
+
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Policy Number</mat-label>
+            <input matInput formControlName="policyNum" required>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>call </mat-icon>
+            <mat-error >
+              Insurance company Number is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width " appearance="outline">
+            <mat-label>Insurance Policy Type </mat-label>
+            <mat-select formControlName="policyType" required>
+              <mat-option [value]="'  health'">
+               Health
+              </mat-option>
+              <mat-option [value]="'vision'">
+               Vision
+              </mat-option>
+              <mat-option [value]="' dental'">
+              Dental
+               </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Website</mat-label>
+            <input matInput formControlName="website">
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix> computer </mat-icon>
+
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Contact Person Name </mat-label>
+            <input matInput formControlName="contactPersonName">
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>  person </mat-icon>
+
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Contact Person Number </mat-label>
+            <input matInput formControlName="phone">
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix> contact_phone  </mat-icon>
+
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Contact Person Email </mat-label>
+            <input matInput formControlName="contactPersonEmail">
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>contact_mail </mat-icon>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [disabled]="!insuranceForm.valid" [mat-dialog-close]="1" (click)="onSubmit()">Save</button>
+             <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,58 @@
+
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+         <!--{{dialogTitle}}-->
+    </div>
+    <button mat-icon-button  class="modal-close-button" aria-label="Close dialog" (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+
+    <!------------------------  Patients List ----------------------------------->
+
+      <!--<div class="card py-12 py-md-12" width="100px">-->
+
+          <div class=" d-flex justify-content-between px-3 px-md-4">
+            <!--<img src="assets/images/user/usrbig1.jpg" height="55sspx" width="55px" alt="" class="rounded-circle">-->
+            <div class="">
+              <h6 class="col-green">{{patient.userFirstName}} {{patient.userLastName}}</h6>
+              <p>Patient Id : {{ patient.userKey}}</p>
+            </div>
+            <div>
+              <!--<h6 class="">10:00 - 10:30 AM</h6>-->
+             <!-- <p class="grey"> Friday, June 26 </p>-->
+            </div>
+          </div>
+          <hr class="light-hr">
+          <div class="d-flex flex-column justify-content-start w-100 px-3 px-md-4">
+            <div><i class="fas fa-map-marker-alt pt-3 psr-3"></i> {{patient.address}}</div>
+            <div><i class="fas fa-phone pt-3 psr-3"></i>{{patient.phoneNumber}}</div>
+          </div>
+          <hr class="light-hr">
+          <div class="d-flex justify-content-between px-3 px-md-4">
+            <div>
+              <div class="d-flex">
+
+                <p class="psr-2">Blood Type: </p>
+                <div class="font-weight-bold">
+
+                  {{patient.bloodGroup}} </div>
+              </div>
+              <div class="d-flex">
+                <p class="psr-2">Surgery Type:</p>
+                <div class="font-weight-bold"> {{patient.surgeryType}}</div>
+              </div>
+            </div>
+          </div>
+          <hr class="light-hr">
+          <div class="d-flex justify-content-around px-4"> <button mat-stroked-button color="primary" (click)="goToFirstComponent(patient)" >Read
+              More</button></div>
+        <!--</div>-->
+
+  </div>
+
+
+
+

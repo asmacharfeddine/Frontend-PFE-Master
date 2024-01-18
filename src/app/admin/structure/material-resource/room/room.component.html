@@ -1,0 +1,108 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Structure'" [items]="['...', roomGroup?.roomGrpNm || 'Room Group Name'  ]" [active_item]="'Rooms'"></app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="materialTableHeader">
+                  <div class="left">
+                    <ul class="header-buttons-left ms-0">
+                      <li class="tbl-title">
+                        <h2>Rooms</h2>
+                      </li>
+                      <li class="tbl-search-box">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search..." type="text" class="browser-default search-field border border-primary"
+                        [(ngModel)]="searchQuery" (input)="searchRooms()"
+                          aria-label="Search box">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row clearfix mt-2">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tableBody">
+                      <div class="table-responsive">
+                        <table class="table table-hover" *ngIf="filtredRooms.length"  matSort>
+                          <thead>
+                            <tr>
+                              <th mat-sort-header="roomLabel">Room Label</th>
+                              <th class="text-center">Room Type</th>
+                              <th class="text-center">Room Class</th>
+                              <th class="text-center">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let room of filtredRooms | paginate : { itemsPerPage: items, currentPage: page }" (dblclick)="edit(room)">
+                              <td width="250px">{{ room.roomLabel }}</td>
+                              <td class="text-center" width="200px">{{ room.roomType }}</td>
+                              <td class="text-center" width="200px">{{ room.roomClass ? room.roomClass : '-' }}</td>
+                              <td class="text-center">
+                                <div class="actions">
+                                  <!-- <button mat-icon-button class="tbl-action-btn"
+                                  [disabled]="!hasEquipmentElements(room)"
+                                  [style.opacity]="!hasEquipmentElements(room) ? 0.5 : 1"
+                                  (click)="fetchEquipments(room.roomKy)">
+                                    <app-feather-icons [icon]="'external-link'"
+                                      [class]="'tbl-fav-get-child-elements'"></app-feather-icons>
+                                  </button> -->
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  (click)="fetchEquipments(room.roomKy)">
+                                    <app-feather-icons [icon]="'external-link'"
+                                      [class]="'tbl-fav-get-child-elements'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  (click)="addChild(room)">
+                                    <app-feather-icons [icon]="'plus-square'"
+                                      [class]="'tbl-fav-add-child'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  [disabled]="hasEquipmentElements(room)"
+                                  [style.opacity]="hasEquipmentElements(room) ? 0.5 : 1"
+                                  (click)="onDelete(room)"
+                                    >
+                                    <app-feather-icons [icon]="'trash-2'"
+                                      [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="mt-4" *ngIf="filtredRooms.length">
+                          <div class="d-flex justify-content-between">
+                              <span>
+                                Showing: <b>{{ page }}-{{ items }}</b> of
+                                <b>{{ filtredRooms.length }}</b> results
+                              </span>
+                                <pagination-controls
+                                  (pageChange)="page = $event"
+                                ></pagination-controls>
+                          </div>
+                      </div>
+                      <div class="alert alert-message rounded mt-2" *ngIf="!filtredRooms.length && !isLoading">
+                        <i class='fas fa-exclamation-triangle' style="font-size: 16px;"><strong> Oops!</strong> No rooms found!</i>
+                      </div>
+                      <div class="loading-spinner" *ngIf="isLoading">
+                        <div>
+                          <app-loading-spinner></app-loading-spinner>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

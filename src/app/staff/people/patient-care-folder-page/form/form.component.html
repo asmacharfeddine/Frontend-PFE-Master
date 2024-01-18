@@ -1,0 +1,208 @@
+<div class="modalHeader" style="margin-bottom: 20px;">
+  <div class="editRowModal">
+    <div class="modalHeader clearfix">
+      <!--<img [src]='' alt="avatar">-->
+      <div class="modal-about">
+      Add A Prescription
+      </div>
+    </div>
+  </div>
+  <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="prescriptionForm!">
+    <div class="row">
+
+      <div class="float-container">
+
+        <!--<div class="float-child, col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3"  style="margin-right: 10px">
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Prescription Date</mat-label>
+            <input matInput formControlName="prescriptionDate" name="prescriptionDate" />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+      </div>-->
+      <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+        <!--<mat-form-field class="example-full-width mb-3" appearance="outline">
+          <mat-label>Date Of Prescription</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="prescriptionDate"  required>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          <mat-error *ngIf="prescriptionForm.get('prescriptionDate')?.hasError('required')">
+            Please select a date
+          </mat-error>
+        </mat-form-field>-->
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label> prescriptionDate</mat-label>
+          <input matInput formControlName="prescriptionDate" name="prescriptionDate" />
+          <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+
+
+  <div class="float-child " style="margin-left: 5px">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label> prescriptionTime</mat-label>
+      <input matInput formControlName="prescriptionTime" name="prescriptionTime" />
+      <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+    </mat-form-field>
+    <!--<mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Prescription Time</mat-label>
+      <input matInput formControlName="prescriptionTime" name="prescriptionTime" value={{now}} />
+      <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+    </mat-form-field>-->
+  </div>
+  </div>
+
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Dosage</mat-label>
+          <input matInput formControlName="dosage" name="dosage" />
+          <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="float-container">
+
+
+
+        <div class="float-child, col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3"  style="margin-right: 10px">
+
+      <!--<mat-form-field class="example-full-width">
+          <input type="text" placeholder="Pick one medication" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"  >
+          <mat-autocomplete [displayWith]="displayMed"  #auto="matAutocomplete" (optionSelected)="onMedicationSelected($event)">
+            <mat-option *ngFor="let m of filteredOptions | async" [value]="m" (click)="openDetailsForm(m)">
+              {{m.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>-->
+      </div>
+
+
+
+    <!--<div class="float-child " style="margin-left: 5px">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>treatmentDuration</mat-label>
+        <input matInput formControlName="treatmentDuration" name="treatmentDuration" />
+        <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+      </mat-form-field>
+    </div>-->
+    </div>
+
+    <!-- Add MedicationPart -->
+<button mat-icon-button (click)="addMedicationPart()">
+
+  <mat-icon>add_circle_outline</mat-icon>
+
+</button>
+
+<!-- Display MedicationPart controls -->
+<div *ngFor="let medicationPart of medicationParts.controls; let i = index" [formGroup]="medicationPart">
+  <!-- MedicationPart inputs -->
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Period</mat-label>
+    <input matInput formControlName="period"/>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Takes</mat-label>
+    <input matInput formControlName="takes" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <input matInput formControlName="quantity" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Notes</mat-label>
+    <input matInput formControlName="notes" />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Pick one medication" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"  >
+    <mat-autocomplete [displayWith]="displayMed"  #auto="matAutocomplete" (optionSelected)="onMedicationSelected($event)">
+      <mat-option *ngFor="let m of filteredOptions | async" [value]="m" (click)="openDetailsForm(m)">
+        {{m.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <!-- Remove MedicationPart -->
+  <button mat-icon-button (click)="removeMedicationPart(i)">
+    <mat-icon>remove_circle_outline</mat-icon>
+  </button>
+</div>
+
+
+
+    <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label> Dosage</mat-label>
+        <input matInput formControlName="dosage" name="dosage" />
+        <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+      </mat-form-field>
+    </div>-->
+
+
+     <!--<button mat-menu-item  (click)="addDiv()">
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    <div *ngFor="let div of divs">
+    <div class="float-container">
+    <div class="float-child, col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3"  style="margin-right: 10px">
+      <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Pick one medication" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"  >
+      <mat-autocomplete [displayWith]="displayMed"  #auto="matAutocomplete" (optionSelected)="onMedicationSelected($event)">
+        <mat-option *ngFor="let m of filteredOptions | async" [value]="m" (click)="openDetailsForm(m)">
+          {{m.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+   </div>
+
+   <div class="float-child " style="margin-left: 5px">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>treatmentDuration</mat-label>
+      <input matInput formControlName="treatmentDuration" name="treatmentDuration" />
+      <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+    </mat-form-field>
+  </div>
+
+  </div>
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label> Dosage</mat-label>
+      <input matInput formControlName="dosage" name="dosage" />
+      <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+    </mat-form-field>
+  </div>
+</div>-->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>special Instructions</mat-label>
+        <textarea matInput formControlName="specialInstructions"
+          name="treatmentDescription"> </textarea>
+      </mat-form-field>
+    <!--</div>-->
+  </div>
+
+    <!--<div class="row">-->
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+    </div>
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" [mat-dialog-close]="1"
+            (click)="addPrescriptionToPatientWithMedicationParts()">Save</button>
+          <button mat-raised-button color="warn" tabindex="-1" >Cancel</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+
+
+

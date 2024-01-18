@@ -1,0 +1,53 @@
+<div class="addContainer">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+         <!--{{dialogTitle}}-->
+         Update Category
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button  class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form  [formGroup]="categoryForm" (ngSubmit)="onSubmit()" >
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Category Name</mat-label>
+            <mat-error *ngIf="categoryForm.get('categoryName')?.hasError('required')">Category Name is required</mat-error>
+            <input id="categoryName" matInput formControlName="categoryName" name="categoryName"  [(ngModel)] ="data.categoryName"  [disabled]="categoryForm.get('categoryName')?.untouched === true" required>
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+
+            <mat-label>Description</mat-label>
+
+            <textarea id="categoryDescription" matInput formControlName="categoryDescription" name="categoryDescription"  [(ngModel)] ="data.categoryDescription"></textarea>
+
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <!-- <button mat-raised-button color="primary" [type]="submit" [disabled]="!staffForm.valid"
+              [mat-dialog-close]="1" (click)="confirmAdd()">Save</button> -->
+            <button mat-raised-button [disabled]="!categoryForm.valid " color="primary" [mat-dialog-close]="1"
+             type="submit">Update</button>
+            <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+//  .tr {
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//  }
+
+//  .actions {
+//    visibility: hidden;
+//  }
+
+//  .hoverable-row:hover {
+//    cursor: pointer;
+//  }
+
+//  tr:hover .actions {
+//    visibility: visible;
+//  }
+
+
+tr{
+  cursor: pointer;
+}

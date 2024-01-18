@@ -1,0 +1,59 @@
+@import '~ng-pick-datetime/assets/style/picker.min.css';
+
+.float-container {
+  //  padding: 20px;
+  display: flex;
+
+  }
+
+  .float-child {
+    //width: 50%;
+   // float: left;
+    flex: 1;
+
+    //padding: 20px;
+  }
+
+  .float-child:first-child{
+    margin-right: 20px;
+
+  }
+
+  --------------------------------------
+
+  .flex-container {
+    display: flex;
+  }
+
+  .flex-child {
+    flex: 1;
+    border: 2px solid yellow;
+  }
+
+  .flex-child:first-child {
+    margin-right: 20px;
+  }
+
+
+
+
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+
+  .custom-dialog {
+    max-width: 70%; /* Adjust the percentage to your preference */
+  }
+
+  /* Make the MatDialog taller in height */
+  .mat-dialog-container {
+    max-height: 80vh; /* Adjust the viewport height to your preference */
+  }

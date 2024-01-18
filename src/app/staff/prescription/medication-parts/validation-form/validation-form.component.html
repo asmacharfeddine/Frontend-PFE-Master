@@ -1,0 +1,119 @@
+<div class="addContainer" style="max-width: 600px;">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+        Add a take in this day
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+  <div mat-dialog-content>
+    <form  [formGroup]="takeForm!">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Date</mat-label>
+            <mat-error *ngIf="takeForm.get('takeDate')?.hasError('required')">Date is
+              required</mat-error>
+            <input matInput  formControlName="takeDate" name="takeDate" readonly/>
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label> Take Time</mat-label>
+            <mat-error *ngIf="takeForm.get('takeTime')?.hasError('required')">Date is
+              required</mat-error>
+            <input matInput  formControlName="takeTime" name="takeTime" readonly />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field formControlName="medicationName" class="example-full-width" appearance="outline">
+            <mat-label>Medication Name</mat-label>
+            <input matInput   [value]="medicationPart.medication.name">{{medicationPart.medication.name}}          </mat-form-field>
+        </div>-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Medication Name</mat-label>
+            <input matInput formControlName="medicationName" readonly required>
+            <mat-error *ngIf="takeForm.get('medicationName')?.hasError('required')">Medication name is
+              required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Number of  Takes that already been taken today</mat-label>
+            <input matInput   />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>-->
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Notes</mat-label>
+            <input matInput formControlName="takeNotes" name="takeNotes" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Force</mat-label>
+            <input matInput name="force" />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <!--<mat-form-field class="example-full-width custom-height" appearance="outline">
+            <mat-label>ActiveIngredients</mat-label>
+            <input matInput formControlName="value" name="value" />
+            // cmntr ici: [disabled]="categoryForm.get('categoryName')?.untouched === true"
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix fontIcon="add" (click)="openActiveIngredientsForm()"></mat-icon>
+          </mat-form-field>
+        </div>-->
+
+          </div>
+        <div class="float-container">
+
+          <!--<mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Please Select a Category:</mat-label>
+              <mat-select  formControlName="categoryName">
+                <mat-option *ngFor="let categoryName of categoryNames" [value]="categoryName">{{ categoryName }}</mat-option>
+                </mat-select>
+            </mat-form-field>-->
+          <div class="float-child">
+
+          </div>
+
+          <div class="float-child" style="margin-right: 20px">
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [mat-dialog-close]="1" (click)="adddayTakeToMedicationPart()"
+               [disabled]="medicationPart.period != null && medicationPart.totalCount==medicationPart.takes*medicationPart.period || !takeForm.valid" >Save</button>
+              <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

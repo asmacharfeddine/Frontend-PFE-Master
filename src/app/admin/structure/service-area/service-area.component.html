@@ -1,0 +1,105 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Structure'" [items]="['...', service?.serviceNm || 'Service Name'  ]" [active_item]="'Service Areas'"></app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="materialTableHeader">
+                  <div class="left">
+                    <ul class="header-buttons-left ms-0">
+                      <li class="tbl-title">
+                        <h2>Service areas</h2>
+                      </li>
+                      <li class="tbl-search-box">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search..." type="text" class="browser-default search-field border border-primary"
+                        [(ngModel)]="searchQuery" (input)="searchServiceAreas()"
+                          aria-label="Search box">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row clearfix mt-2">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tableBody">
+                      <div class="table-responsive">
+                        <table class="table table-hover" *ngIf="filteredServiceAreas.length"  matSort>
+                          <thead>
+                            <tr>
+                              <th mat-sort-header="servAreaNm">Service Area Label</th>
+                              <th class="text-center">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let serviceArea of filteredServiceAreas | paginate : { itemsPerPage: items, currentPage: page }" (dblclick)="edit(serviceArea)">
+                              <td width="450px">{{ serviceArea.servAreaNm }}</td>
+                              <td class="text-center">
+                                <div class="actions">
+                                  <!-- <button mat-icon-button class="tbl-action-btn"
+                                  [disabled]="!hasExploitationUnitsElements(serviceArea)"
+                                  [style.opacity]="!hasExploitationUnitsElements(serviceArea) ? 0.5 : 1"
+                                  (click)="fetchExploitationUnits(serviceArea.servAreaKy)">
+                                    <app-feather-icons [icon]="'external-link'"
+                                      [class]="'tbl-fav-get-child-elements'"></app-feather-icons>
+                                  </button> -->
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  (click)="fetchExploitationUnits(serviceArea.servAreaKy)">
+                                    <app-feather-icons [icon]="'external-link'"
+                                      [class]="'tbl-fav-get-child-elements'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  (click)="addChild(serviceArea)">
+                                    <app-feather-icons [icon]="'plus-square'"
+                                      [class]="'tbl-fav-add-child'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn"
+                                  [disabled]="hasExploitationUnitsElements(serviceArea)"
+                                  [style.opacity]="hasExploitationUnitsElements(serviceArea) ? 0.5 : 1"
+                                  (click)="onDelete(serviceArea)"
+
+                                    >
+                                    <app-feather-icons [icon]="'trash-2'"
+                                      [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="mt-4" *ngIf="filteredServiceAreas.length">
+                          <div class="d-flex justify-content-between">
+                              <span>
+                                Showing: <b>{{ page }}-{{ items }}</b> of
+                                <b>{{ filteredServiceAreas.length }}</b> results
+                              </span>
+                                <pagination-controls
+                                  (pageChange)="page = $event"
+                                ></pagination-controls>
+                          </div>
+                      </div>
+                      <div class="alert alert-message rounded mt-2" *ngIf="!filteredServiceAreas.length && !isLoading">
+                        <i class='fas fa-exclamation-triangle' style="font-size: 16px;"><strong> Oops!</strong> No service areas found!</i>
+                      </div>
+                      <div class="loading-spinner" *ngIf="isLoading">
+                        <div>
+                          <app-loading-spinner></app-loading-spinner>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

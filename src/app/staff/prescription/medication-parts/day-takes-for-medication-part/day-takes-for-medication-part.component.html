@@ -1,0 +1,126 @@
+<p>medication-parts works!</p>
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'All medications and details for this prescription'" [items]="['Medications']"
+        [active_item]="'All Medications'"></app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tabbable-line">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="materialTableHeader">
+                  <div class="left">
+                    <ul class="header-buttons-left ms-0">
+                      <li class="tbl-title">
+                        <h2>Medications</h2>
+                      </li>
+                      <li class="tbl-search-box">
+                        <label><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search..." type="text"
+                          class="browser-default search-field border border-primary" aria-label="Search box">
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="right">
+                    <ul class="tbl-export-btn">
+                      <li class="tbl-header-btn">
+                        <div class="m-l-10" matTooltip="ADD">
+                          <!--<button mat-mini-fab color="primary" >
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>-->
+                        </div>
+                      </li>
+                      <li class="tbl-header-btn">
+                        <div class="m-l-10" matTooltip="REFRESH">
+                          <button mat-mini-fab color="primary">
+                            <mat-icon class="col-white">refresh</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+
+
+                    </ul>
+                  </div>
+                </div>
+                <div class="row clearfix mt-2">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tableBody">
+                      <div class="table-responsive">
+                        <table class="table table-hover" matSort>
+                          <thead>
+                            <tr>
+
+                              <th mat-sort-header="medication">medication</th>
+                              <th mat-sort-header="dosageForm">dosageForm</th>
+                              <th mat-sort-header="period">period</th>
+                              <th mat-sort-header="quantity">quantity/take</th>
+                              <th mat-sort-header="status">status</th>
+
+                              <th mat-sort-header="takes">takes/Day</th>
+                              <!--<th mat-sort-header="force">Force</th>-->
+                              <th>Actions</th>
+
+                              <!--<th>Add a take</th>-->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td></td>
+
+                              <!-- <span matBadge="{{ siteGroup.sites.length }}" matBadgePosition="before" matBadgeColor="primary"></span> -->
+                              <td></td>
+                              <td></td>
+                              <td></td>
+
+                             <!--<td>{{medication.activeIngredients}} </td>-->
+
+                              <td></td>
+
+
+                              <td>
+                                  <button mat-icon-button   style="width: fit-content;">
+                                    <mat-icon class="col-purple">add_circle_outline</mat-icon>
+                                  </button>
+                                  <button mat-icon-button>
+                                    <mat-icon class="col-green">visibility</mat-icon>
+                                  </button>
+
+
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <div class="loading-spinner">
+                          <div>
+                            <!--<app-loading-spinner></app-loading-spinner>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+

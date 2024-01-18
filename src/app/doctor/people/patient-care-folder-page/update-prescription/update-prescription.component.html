@@ -1,0 +1,85 @@
+<div class="addContainer" style="max-width: 600px;">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+        Update this prescription
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+  <div mat-dialog-content>
+    <form  [formGroup]="updateForm!">
+      <div class="row">
+
+
+         <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>{{data.status}}</mat-label>
+          <mat-select  formControlName="status" name="status"  >
+            <mat-option *ngFor="let status of statusTypes" [value]="status">{{ status }}</mat-option>
+            <!--<mat-option *ngFor="let c of categories" [value]="c" required >
+             <span>{{ c.categoryName }}</span></mat-option>-->
+             <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+            </mat-select>
+        </mat-form-field>
+
+        <!--<mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>{{data.physicalTreatmentCategory.categoryName}}</mat-label>
+          <mat-select  formControlName="categoryName" name="category Name"  >
+            <mat-option *ngFor="let c of categories" [value]="c" required >
+             <span>{{ c.categoryName }}</span></mat-option>
+             <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+            </mat-select>
+        </mat-form-field>-->
+
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field formControlName="medicationName" class="example-full-width" appearance="outline">
+            <mat-label>Medication Name</mat-label>
+            <input matInput   [value]="medicationPart.medication.name">{{medicationPart.medication.name}}          </mat-form-field>
+        </div>-->
+
+
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Number of  Takes that already been taken today</mat-label>
+            <input matInput   />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>-->
+
+
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Force</mat-label>
+            <input matInput name="force" />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <!--<mat-form-field class="example-full-width custom-height" appearance="outline">
+            <mat-label>ActiveIngredients</mat-label>
+            <input matInput formControlName="value" name="value" />
+            // cmntr ici: [disabled]="categoryForm.get('categoryName')?.untouched === true"
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix fontIcon="add" (click)="openActiveIngredientsForm()"></mat-icon>
+          </mat-form-field>
+        </div>-->
+
+          </div>
+                <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [mat-dialog-close]="1" (click)="updateStatus()" 
+ >Update</button>
+              <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

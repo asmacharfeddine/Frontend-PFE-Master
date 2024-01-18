@@ -1,0 +1,271 @@
+<div class="modalHeader" style="margin-bottom: 20px;" class="custom-dialog">
+  <div class="editRowModal" class="custom-dialog">
+    <div class="modalHeader clearfix">
+      <!--<img [src]='' alt="avatar">-->
+      <div class="modal-about" class="custom-dialog">
+        Add A Prescription
+      </div>
+    </div>
+  </div>
+  <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content >
+  <form [formGroup]="prescriptionForm!">
+    <div class="row">
+
+      <div class="float-container">
+
+
+        <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Date Of Prescription</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="prescriptionDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <mat-error *ngIf="prescriptionForm.get('prescriptionDate')?.hasError('required')">
+              Please select a date
+            </mat-error>
+            <mat-error *ngIf="prescriptionForm.get('prescriptionDate')?.hasError('duplicated')">
+              you already have a prescription with this date
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="float-child " style="margin-left: 5px">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label> prescriptionTime</mat-label>
+            <input matInput formControlName="prescriptionTime" name="prescriptionTime" required />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+            <mat-error *ngIf="prescriptionForm.get('prescriptionTime')?.hasError('required')">
+              Missing The Time
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div>
+      <form [formGroup]="initialMedicationPart!">
+      <div class="float-container">
+         <mat-form-field class="float-child" appearance="outline">
+          <mat-label>Period</mat-label>
+          <mat-select formControlName="period" ><!--required-->
+            <mat-option value="">Choose a period</mat-option>
+            <mat-option *ngFor="let d of days" [value]="d">
+              {{ d }} Days
+            </mat-option>
+          </mat-select>
+          <!--<mat-error *ngIf="initialMedicationPart.get('period')?.hasError('required')">
+            Please select a period
+          </mat-error>-->
+        </mat-form-field>
+        <mat-form-field class="float-child" appearance="outline">
+          <mat-label>Takes</mat-label>
+          <mat-select formControlName="takes" required>
+            <mat-option value="">Select the takes</mat-option>
+            <mat-option *ngFor="let t of takesNumber" [value]="t">
+              {{ t }} Times/Day
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="initialMedicationPart.get('takes')?.hasError('required')">
+            Please select how many takes
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <div class="float-container">
+
+          <mat-form-field class="float-child" appearance="outline">
+            <mat-label>Quantity</mat-label>
+            <mat-select formControlName="quantity" required>
+              <mat-option value="">Select the Quantity</mat-option>
+              <mat-option *ngFor="let q of quantities" [value]="q" >
+                {{ q }} /Take
+              </mat-option>
+
+            </mat-select>
+            <mat-error *ngIf="initialMedicationPart.get('quantity')?.hasError('required')">
+              Please select the quantity
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" class="float-child">
+            <input type="text" placeholder="Pick one medication" aria-label="Number" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" >
+            <mat-autocomplete [displayWith]="displayMed" #auto="matAutocomplete"
+              (optionSelected)="onMedicationSelected($event)">
+              <mat-option *ngFor="let m of filteredOptions | async" [value]="m" (click)="openDetailsForm(m)">
+                {{m.name}}
+              </mat-option>
+
+            </mat-autocomplete>
+            <mat-error *ngIf="initialMedicationPart.get('myControl')?.hasError('required')">
+              Please pick a medication
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="float-container">
+
+          <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>start date</mat-label>
+              <input matInput [matDatepicker]="picker3" formControlName="startDate" ><!--required-->
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+              <!--<mat-error *ngIf="initialMedicationPart.get('startDate')?.hasError('required')">
+                Please select a start date
+              </mat-error>-->
+            </mat-form-field>
+          </div>
+
+          <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width mb-3" appearance="outline" style="margin-left: 5px">
+              <mat-label>end date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="endDate" ><!--required-->
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <!--<mat-error *ngIf="initialMedicationPart.get('endDate')?.hasError('required')">
+                Please select an end date
+              </mat-error>-->
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Notes</mat-label>
+          <input matInput formControlName="notes" />
+
+        </mat-form-field>
+      </form>
+      </div>
+
+
+
+      <!-- Add MedicationPart -->
+      <!--<button mat-icon-button (click)="addMedicationPart()" style="margin-top: -20px;">
+
+        <mat-icon>add_circle_outline</mat-icon>
+
+      </button>-->
+
+      <!-- Display MedicationPart controls -->
+      <div *ngFor="let medicationPart of medicationParts.controls; let i = index" [formGroup]="medicationPart" >
+        <!-- MedicationPart inputs -->
+        <div class="float-container">
+        <mat-form-field class="float-child" appearance="outline">
+          <mat-label>Period</mat-label>
+          <mat-select formControlName="period" required>
+            <mat-option value="">Choose a period</mat-option>
+            <mat-option *ngFor="let d of days" [value]="d">
+              {{ d }} Days
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="prescriptionForm.get('period')?.hasError('required')">
+            Please select a period
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="float-child" appearance="outline">
+          <mat-label>Takes</mat-label>
+          <mat-select formControlName="takes" required>
+            <mat-option value="">Select the takes</mat-option>
+            <mat-option *ngFor="let t of takesNumber" [value]="t">
+              {{ t }} Times/Day
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="prescriptionForm.get('takes')?.hasError('required')">
+            Please select takes number
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="float-container">
+
+        <mat-form-field class="float-child" appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <mat-select formControlName="quantity" required>
+            <mat-option value="">Select the Quantity</mat-option>
+            <mat-option *ngFor="let q of quantities" [value]="q">
+              {{ q }} /Take
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="prescriptionForm.get('quantity')?.hasError('required')">
+            Please select a quantity
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" class="float-child">
+          <input type="text" placeholder="Pick one medication" aria-label="Number" matInput [formControl]="myControl"
+            [matAutocomplete]="auto" required>
+          <mat-autocomplete [displayWith]="displayMed" #auto="matAutocomplete"
+            (optionSelected)="onMedicationSelected($event)">
+            <mat-option *ngFor="let m of filteredOptions | async" [value]="m" (click)="openDetailsForm(m)">
+              {{m.name}}
+            </mat-option>
+
+          </mat-autocomplete>
+          <mat-error *ngIf="prescriptionForm.get('myControl')?.hasError('required')">
+            Please select a medication
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+        <div class="float-container">
+
+          <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-label>start date</mat-label>
+              <input matInput [matDatepicker]="picker3" formControlName="startDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+              <mat-error *ngIf="prescriptionForm.get('startDate')?.hasError('required')">
+                Please select a start date
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="float-child,col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+            <mat-form-field class="example-full-width mb-3" appearance="outline" style="margin-left: 5px">
+              <mat-label>end date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="endDate" required>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-error *ngIf="prescriptionForm.get('endDate')?.hasError('required')">
+                Please select an end date
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Notes</mat-label>
+          <input matInput formControlName="notes" />
+        </mat-form-field>
+        <!-- Remove MedicationPart -->
+        <button mat-icon-button (click)="removeMedicationPart(i)">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </div>
+
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>special Notes</mat-label>
+          <textarea matInput formControlName="specialInstructions" name="treatmentDescription"> </textarea>
+        </mat-form-field>
+        <!--</div>-->
+      </div>
+
+      <!--<div class="row">-->
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [mat-dialog-close]="1"
+              (click)="addPrescriptionToPatientWithMedicationParts()" [disabled]="!prescriptionForm.valid || !initialMedicationPart.valid" >Save</button>
+            <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

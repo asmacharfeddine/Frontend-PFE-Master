@@ -1,0 +1,22 @@
+.dialog-card-container {
+  display: flex;
+  justify-content: center; /* Center the card horizontally */
+  align-items: center; /* Center the card vertically */
+  height: 450px; /* Make the container take up the full height of the dialog content */
+  width: 450px;
+}
+
+.card {
+  width: 450px;
+  height: 440px;
+  /* Adjust card styles as needed */
+  max-width: 450px; /* Make sure the card doesn't exceed the dialog's width */
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}

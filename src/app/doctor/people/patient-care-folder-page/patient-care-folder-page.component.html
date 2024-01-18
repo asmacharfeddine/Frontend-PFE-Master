@@ -1,0 +1,887 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Patient Folder'" [items]="['Patient']" [active_item]="'Details'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Patient Informations</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="bookingForm" (ngSubmit)="onSubmit()" (prescriptionAdded)="refreshTable()">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>First name</mat-label>
+                    <input matInput formControlName="userFirstName" required readonly >
+                    <mat-error *ngIf="bookingForm.get('first')?.hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Last name</mat-label>
+                    <input matInput formControlName="userLastName" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <input matInput formControlName="gender" readonly>
+                  </mat-form-field>
+                </div>
+
+               <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" required>
+                      <mat-option [value]="'male'">
+                        Male
+                      </mat-option>
+                      <mat-option [value]="'female'">
+                        Female
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="bookingForm.get('gender')?.hasError('required')">
+                      Gender is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>-->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>phoneNumber</mat-label>
+                    <input matInput formControlName="phoneNumber"  required readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput formControlName="address" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>bloodGroup</mat-label>
+                    <input matInput formControlName="bloodGroup" required readonly>
+
+                  </mat-form-field>
+                </div>
+               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="patientBirthDate" required readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker" disabled ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+
+                  </mat-form-field>
+                  </div>
+
+                <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Patient Birthdate</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="patientBirthDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+
+                  </mat-form-field>
+                </div>-->
+              </div>
+              <h2 class="card-inside-title">Sugery Details</h2>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline" readonly>
+                    <mat-label>Operation type</mat-label>
+                    <input matInput formControlName="surgeryType"  required readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date Of Operation</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="surgeryDate" required readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker1" disabled></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+               <!--<label>Time Of Appointment:</label>-->
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-button-toggle-group name="timeSlot" aria-label="Time Slot" class="mb-5"
+                    formControlName="timeSlot">
+                    <mat-button-toggle value="slot1">10:30-11:00</mat-button-toggle>
+                    <mat-button-toggle value="slot2">11:00-11:30</mat-button-toggle>
+                    <mat-button-toggle value="slot3" [disabled]="isDisabled">11:30-12:00</mat-button-toggle>
+                    <mat-button-toggle value="slot4">12:00-12:30</mat-button-toggle>
+                    <mat-button-toggle value="slot5">12:30-01:00</mat-button-toggle>
+                    <mat-button-toggle value="slot6">03:30-04:00</mat-button-toggle>
+                    <mat-button-toggle value="slot7">04:00-04:30</mat-button-toggle>
+                    <mat-button-toggle value="slot8">04:30-05:00</mat-button-toggle>
+                    <mat-button-toggle value="slot9">05:00-05:30</mat-button-toggle>
+                    <mat-button-toggle value="slot10">05:30-06:00</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>-->
+             <!-- </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Injury/Contion</mat-label>
+                    <textarea matInput formControlName="injury"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Note</mat-label>
+                    <textarea matInput formControlName="note"></textarea>
+                  </mat-form-field>
+                </div>-->
+              </div>
+              <!--<div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+                  <label>Upload Reports</label>
+                  <app-file-upload formControlName="uploadFile"></app-file-upload>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space" [disabled]="!bookingForm.valid " mat-raised-button
+                    color="primary">Submit</button>
+                  <button type="button" mat-raised-button color="warn">Cancel</button>
+                </div>
+              </div>-->
+            </form>
+
+
+
+
+            <section class="section">
+              <div class="content-block">
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div>
+                      <!--<div class="card">-->
+                      <div class="header">
+                        <h2>
+                          Prescriptions</h2>
+                         <div class="header-buttons">
+                        <!--<button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>-->
+                        <button mat-menu-item  (click)="openAddForm(recievedData)">
+                          <mat-icon>add_circle_outline</mat-icon>
+                          <!--<span>Add</span>-->
+                        </button>
+                      </div>
+                        <!--<mat-menu #menu="matMenu">
+                          <button mat-menu-item  (click)="openAddForm(recievedData)">
+                            <mat-icon>add_circle_outline</mat-icon>
+                            <span>Add</span>
+                          </button>
+                          <button mat-menu-item disabled>
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon>refresh</mat-icon>
+                            <span>Refresh</span>
+                          </button>
+                        </mat-menu>-->
+                      </div>
+                      <div class="tableBody">
+                        <div class="table-responsive">
+                          <table class="table table-hover" matSort>
+                            <thead>
+                              <tr>
+                              <th></th>
+                               <th> Prescription Time</th>
+                                <th>Prescription Date</th>
+                                <th>Status</th>
+                                <th>Special Notes</th>
+
+
+                                <th>Actions </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let prescription of uniquePrescriptions" >
+                                <tr >
+                                <td class="text-center">
+                                  <button mat-icon-button (click)="toggleMedicationParts(prescription)" [attr.aria-expanded]="selectedPrescreption === prescription ? 'true' : 'false'">
+                                    <mat-icon>{{ selectedPrescreption === prescription ? "remove" : "add" }}</mat-icon>
+                                  </button>
+                                </td>
+                                <td>{{prescription.prescriptionTime}}</td>
+                                <td>{{prescription.prescriptionDate | date:'dd/MM/yyyy'}}</td>
+
+                                <td class="max-texts">
+                                  <span [ngClass]="{
+                                    'badge col-cyan shadow-style m-r-10': prescription.status === 'inProgress'}">
+                                    <span [ngClass]="{
+                                      'badge col-green shadow-style m-r-10 ': prescription.status === 'done'
+                                  }">
+                                  <span [ngClass]="{
+                                    'badge col-red shadow-style m-r-10 ': prescription.status === 'blocked'
+                                }">
+                                  {{prescription.status}}</span></span></span>
+                                </td>
+                                <td>{{prescription.specialInstructions}}</td>
+
+                                <td>
+                                  <div class="actions">
+                                    <!--<button
+                                    mat-icon-button
+                                    class="tbl-action-btn"
+                                    (click)="showPrescriptionMedicationParts(prescription.prescriptionKey)"
+                                       >
+                                    <app-feather-icons [icon]="'external-link'" [class]="'tbl-fav-get-child-elements'"></app-feather-icons>
+                                  </button>-->
+                                    <!--<button mat-icon-button class="tbl-action-btn">
+                                      <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                    </button>-->
+                                    <button mat-icon-button class="tbl-action-btn" (click)="DeletePrescription(prescription)" [disabled]="isDeleteButtonDisabled(prescription) || prescription.status==='done'" >
+
+
+                                      <app-feather-icons [icon]="'trash-2'"
+                                        [class]="'tbl-fav-delete'"></app-feather-icons>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr *ngIf="selectedPrescreption === prescription">
+                                <td colspan="6">
+                                  <table class="table table-hover " *ngIf="prescription.medicationParts.length" class="table table-bordered table-sm">
+                                    <thead>
+                                      <tr>
+                                    <th></th>
+                                    <th></th>
+
+                                    <th>StartDate</th>
+                                    <th>EndDate</th>
+                                    <th>Medication </th>
+                                    <th>DosageForm</th>
+                                    <th>Period </th>
+                                    <th>Takes </th>
+
+                                    <th>Status</th>
+                                    <th>Taken Shots</th>
+                                    <th>Shots to Take</th>
+                                    <th>Notes</th>
+
+                                     <th>Actions</th>
+
+                                  </tr>
+                                  </thead>
+
+                                  <ng-container *ngFor="let medp of prescription.medicationParts">
+                                  <tr>
+                                      <td class="text-center">
+                                        <button mat-icon-button (click)="toggleDayTakes(medp)" [attr.aria-expanded]="selectedMedicationPart === medp ? 'true' : 'false'">
+                                          <mat-icon>{{ selectedMedicationPart === medp ? "remove" : "add" }}</mat-icon>
+                                        </button>
+                                      </td>                                      <td></td>
+
+                                      <td>{{ medp.startDate | date:'dd/MM/yyyy' }}</td>
+                                      <td>{{ medp.endDate | date:'dd/MM/yyyy'}}</td>
+                                      <td>{{ medp.medication.name}}</td>
+                                      <td>{{ medp.medication.dosageForm}}</td>
+                                      <td>{{ medp.period}} days</td>
+                                      <td>{{ medp.takes}} Takes/Day</td>
+
+
+
+                                      <td class="max-texts">
+                                        <span [ngClass]="{
+                                          'badge col-cyan shadow-style m-r-10': prescription.status === 'inProgress'}">
+                                          <span [ngClass]="{
+                                            'badge col-green shadow-style m-r-10': prescription.status === 'done'
+                                        }">
+                                        <span [ngClass]="{
+                                          'badge col-red shadow-style m-r-10': prescription.status === 'blocked'
+                                      }">
+                                        {{medp.status}}</span></span></span>
+                                      </td>
+
+                                     <td>{{ medp.totalTakesCount}} Takes</td>
+                                     <td>{{  (medp.period*medp.takes)-medp.totalTakesCount}} Takes</td>
+                                     <td>{{ medp.notes}}</td>
+
+                                     <td>
+                                      <div class="actions">
+                                        <button
+                                        mat-icon-button
+                                        class="tbl-action-btn" (click)="openEditForm(medp)" [disabled]="medp.status === 'blocked' || medp.status === 'done'"
+                                        ><!---->
+                                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'" ></app-feather-icons>
+                                      </button>
+                                        <!--<button mat-icon-button class="tbl-action-btn">
+                                          <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                        </button>-->
+
+                                      </div>
+                                    </td>
+
+
+                                    </tr>
+
+
+                                    <tr *ngIf="selectedMedicationPart === medp">
+                                      <td colspan="6">
+                                        <table class="table table-hover " *ngIf="medp.dayTakes.length" class="table table-bordered table-sm">
+                                          <thead>
+                                            <tr>
+                                          <th>Medication Name</th>
+                                          <th>Take Date</th>
+
+                                          <th>Take Time</th>
+                                          <th>Notes</th>
+
+                                        </tr>
+                                        </thead>
+                                         <tbody>
+
+                                          <tr *ngFor="let d of medp.dayTakes">
+
+                                            <td>{{d.medicationName}}</td>
+                                            <td>{{d.takeDate | date:'dd/MM/yyyy'}}</td>
+                                            <td>{{d.takeTime}}</td>
+                                            <td>{{d.takeNotes}}</td>
+
+
+                                         </tbody>
+                                        </table>
+                                      </ng-container>
+
+
+
+
+                                  </table>
+                                </td>
+                              </tr>
+
+
+                              </ng-container>
+
+
+                              <!--<tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user1.jpg" alt="">
+                                </td>
+                                <td>John Doe</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.Jacob Ryan </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-red">Fever</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user2.jpg" alt="">
+                                </td>
+                                <td>Sarah Smith</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.Rajesh </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-green">Cholera</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>-->
+                              <tr>
+                                <!--<td class="table-img">
+                                  <img src="assets/images/user/user3.jpg" alt="">
+                                </td>
+                                <td>Airi Satou</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.Jay Soni </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-purple">Jaundice</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user4.jpg" alt="">
+                                </td>
+                                <td>Angelica Ramos</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.John Deo </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-purple">Typhod</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user5.jpg" alt="">
+                                </td>
+                                <td>Ashton Cox</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.Megha Trivedi </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-orange">Maleria</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user8.jpg" alt="">
+                                </td>
+                                <td>Cara Stevens</td>
+                                <td><a href="mailto:test@gmail.com"> Dr.Sarah Smith </a></td>
+                                <td>12/05/2016 </td>
+                                <td>
+                                  <div class="badge col-cyan">Infection</div>
+                                </td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>-->
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          To Do</h2>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item>
+                            <mat-icon>add_circle_outline</mat-icon>
+                            <span>Add</span>
+                          </button>
+                          <button mat-menu-item disabled>
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon>refresh</mat-icon>
+                            <span>Refresh</span>
+                          </button>
+                        </mat-menu>
+                      </div>-->
+                     <!-- <div class="tableBody">
+                        <div class="table-responsive">
+                         <table class="table table-hover ">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Doctor Name</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user5.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com"> Dr.Jay Soni
+                                    </a></div>
+                                  <div class="text-job font-11">(MBBS,MD)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-green">Available</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user6.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com"> Dr.Sarah Smith
+                                    </a></div>
+                                  <div class="text-job font-11">(BDS,MDS)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-orange">Absend</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user3.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com">Dr.Megha Trivedi
+                                    </a></div>
+                                  <div class="text-job font-11">(BHMS)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-green">Available</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user2.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com"> Dr.John Deo
+                                    </a></div>
+                                  <div class="text-job font-11">(MBBS,MS)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-green">Available</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user1.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com"> Dr.Jacob Ryan
+                                    </a></div>
+                                  <div class="text-job font-11">(MBBS,MD)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-orange">Absend</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user8.jpg" alt="">
+                                </td>
+                                <td>
+                                  <div class="media-title"><a href="mailto:test@gmail.com"> Dr.Jay Soni
+                                    </a></div>
+                                  <div class="text-job font-11">(MBBS)</div>
+                                </td>
+                                <td>
+                                  <div class="badge badge-solid-green">Available</div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>-->
+                <!--</div>
+                <div class="row clearfix">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                      <div class="header">
+                        <h2>
+                          Treatments</h2>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item>
+                            <mat-icon>add_circle_outline</mat-icon>
+                            <span>Add</span>
+                          </button>
+                          <button mat-menu-item disabled>
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon>refresh</mat-icon>
+                            <span>Refresh</span>
+                          </button>
+                        </mat-menu>
+                      </div>
+                      <div class="tableBody">
+                        <div class="table-responsive">
+
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Treatment type</th>
+                                <th>Frequence</th>
+                                <th>Duration</th>
+                                <th>Administration date</th>
+                                <th>Administration time</th>
+                                <th>Iterations details</th>
+
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            </table>-->
+
+
+
+                          <!--<table class="table">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Parient Name</th>
+                                <th>Doctors Team</th>
+                                <th>Date Of Operation</th>
+                                <th>Report</th>
+                                <th>Diseases</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user8.jpg" alt="">
+                                </td>
+                                <td>John Deo</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user1.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user2.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user3.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+4</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>12-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>Cancer</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user5.jpg" alt="">
+                                </td>
+                                <td>Jens Brincker</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user7.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user2.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+3</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>14-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>Fracture</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user3.jpg" alt="">
+                                </td>
+                                <td>Mark Hay</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user2.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user1.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user8.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+2</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>18-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>Cataract surgery</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user6.jpg" alt="">
+                                </td>
+                                <td>Mark Hay</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user5.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user3.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user9.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+4</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>20-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>Cholecystectomy</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user1.jpg" alt="">
+                                </td>
+                                <td>Mark Hay</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user2.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user4.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+3</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>22-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>Hysterectomy</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="table-img">
+                                  <img src="assets/images/user/user2.jpg" alt="">
+                                </td>
+                                <td>Mark Hay</td>
+                                <td class="text-truncate">
+                                  <ul class="list-unstyled order-list">
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user6.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user9.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><img class="rounded-circle" src="assets/images/user/user4.jpg"
+                                        alt="user">
+                                    </li>
+                                    <li class="avatar avatar-sm"><span class="badge">+2</span>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td>28-08-2019</td>
+                                <td>
+                                  <i class="far fa-file-pdf tbl-pdf"></i>
+                                </td>
+                                <td>back pain surgery</td>
+                                <td>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  </button>
+                                  <button mat-icon-button class="tbl-action-btn">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>-->
+                        <!--</div>
+                      </div>
+                    </div>
+                  </div>-->
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

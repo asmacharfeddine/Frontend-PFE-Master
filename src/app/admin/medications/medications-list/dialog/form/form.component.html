@@ -1,0 +1,114 @@
+<div class="addContainer" style="max-width: 600px;">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+          <!--{{dialogTitle}}--> Add Medication
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="medicationForm!" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Code</mat-label>
+            <mat-error *ngIf="medicationForm.get('code')?.hasError('required')">Medication code is
+              required</mat-error>
+              <mat-error *ngIf="medicationForm?.get('code')?.hasError('duplicated')">Medication code is
+                duplicated</mat-error>
+            <input matInput formControlName="code" name="code" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label> Name</mat-label>
+            <mat-error *ngIf="medicationForm.get('name')?.hasError('required')">Medication name is
+              required</mat-error>
+              <mat-error *ngIf="medicationForm?.get('name')?.hasError('duplicated')">Medication name is
+                duplicated</mat-error>
+            <input matInput formControlName="name" name="name" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>DosageForm</mat-label>
+            <input matInput formControlName="dosageForm" name="dosageForm" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" name="type" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Force</mat-label>
+            <input matInput formControlName="force" name="force" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <!--<mat-form-field class="example-full-width custom-height" appearance="outline">
+            <mat-label>ActiveIngredients</mat-label>
+            <input matInput formControlName="value" name="value" />
+            // cmntr ici: [disabled]="categoryForm.get('categoryName')?.untouched === true"
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix fontIcon="add" (click)="openActiveIngredientsForm()"></mat-icon>
+          </mat-form-field>
+        </div>-->
+          <mat-form-field appearance="fill">
+            <mat-label>ActiveIngredients</mat-label>
+            <mat-select [formControl]="ActiveIngredients" multiple (click)="loadActiveIngredients()"  (selectionChange)="onActiveIngredientsSelectionChange()">
+              <mat-option *ngFor="let i of activeIngredientsList" [value]="i.activeIngredients_Key">{{i.valueName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+        <div class="float-container">
+
+          <!--<mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Please Select a Category:</mat-label>
+              <mat-select  formControlName="categoryName">
+                <mat-option *ngFor="let categoryName of categoryNames" [value]="categoryName">{{ categoryName }}</mat-option>
+                </mat-select>
+            </mat-form-field>-->
+          <div class="float-child">
+
+          </div>
+
+          <div class="float-child" style="margin-right: 20px">
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [mat-dialog-close]="1" [disabled]="!medicationForm.valid"  type="submit">Save</button>
+              <button mat-raised-button color="warn" tabindex="-1" (click)="onCloseClick()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

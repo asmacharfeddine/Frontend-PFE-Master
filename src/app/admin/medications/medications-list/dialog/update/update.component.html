@@ -1,0 +1,133 @@
+<div class="addContainer" style="max-width: 600px;">
+  <div class="modalHeader" style="margin-bottom: 20px;">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!--<img [src]='' alt="avatar">-->
+        <div class="modal-about">
+          <!--{{dialogTitle}}-->
+          Update Medication
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="modal-close-button" aria-label="Close dialog" (click)="onCloseClick()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="medicationUpdateForm!">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" name="code" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label> Name</mat-label>
+            <input matInput formControlName="name" name="name" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>DosageForm</mat-label>
+            <input matInput formControlName="dosageForm" name="dosageForm" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" name="type" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Force</mat-label>
+            <input matInput formControlName="force" name="force" />
+            <!--[disabled]="categoryForm.get('categoryName')?.untouched === true"-->
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>
+       <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>activeIngredients</mat-label>
+            <input matInput formControlName="activeIngredients" name="activeIngredients" />
+          ///  [disabled]="categoryForm.get('categoryName')?.untouched === true"
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix></mat-icon>
+          </mat-form-field>
+        </div>-->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <!--<mat-form-field class="example-full-width custom-height" appearance="outline">
+            <mat-label>ActiveIngredients</mat-label>
+            <input matInput formControlName="value" name="value" />
+            // cmntr ici: [disabled]="categoryForm.get('categoryName')?.untouched === true"
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix fontIcon="add" (click)="openActiveIngredientsForm()"></mat-icon>
+          </mat-form-field>
+        </div>-->
+
+         <!--<mat-form-field appearance="fill">
+            <mat-label> {{values}}</mat-label>
+            <mat-select [formControl]="ActiveIngredients" multiple (click)="loadActiveIngredients()">
+              <mat-option *ngFor="let i of activeIngredientsList" [value]="i.activeIngredients_Key" >{{i.valueName}}</mat-option>
+            </mat-select>
+          </mat-form-field>-->
+          </div>
+
+          <!--<mat-chip-listbox aria-label="Fish selection">
+            <mat-chip-option [formControl]="ActiveIngredients" multiple ></mat-chip-option>
+            <mat-chip-option>Two fish</mat-chip-option>
+            <mat-chip-option color="accent" selected>Accent fish</mat-chip-option>
+            <mat-chip-option color="warn">Warn fish</mat-chip-option>
+          </mat-chip-listbox>-->
+
+
+          <mat-form-field class="example-full-width mb-3"
+          appearance="outline">
+            <mat-label>Active Ingredients selection</mat-label>
+            <mat-select [formControl]="ActiveIngredients" multiple (click)="loadActiveIngredients()">
+              <mat-option *ngFor="let i of activeIngredientsList" [value]="i.activeIngredients_Key">{{i.valueName}}</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+        <div class="float-container">
+
+          <!--<mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Please Select a Category:</mat-label>
+              <mat-select  formControlName="categoryName">
+                <mat-option *ngFor="let categoryName of categoryNames" [value]="categoryName">{{ categoryName }}</mat-option>
+                </mat-select>
+            </mat-form-field>-->
+          <div class="float-child">
+
+          </div>
+
+          <div class="float-child" style="margin-right: 20px">
+
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" [mat-dialog-close]="1" (click)="updateMedicationWithActiveIngredients()">Update</button>
+              <button mat-raised-button color="warn" tabindex="-1">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
